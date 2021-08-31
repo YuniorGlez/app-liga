@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "app-liga",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
