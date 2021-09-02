@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Football-Jugador
+      Football-Jugador-Todos
     </ion-title>
     <ion-buttons (click)="registrar()" slot="end">
       <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
@@ -57,4 +57,11 @@
       </ion-row>
     </ion-grid>
   </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Cargando datos...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
