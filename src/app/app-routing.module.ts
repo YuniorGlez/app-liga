@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'equipo/:id',
     loadChildren: () => import('./modules/home/pages/lista-equipo/lista-equipo.module').then( m => m.ListaEquipoPageModule)
   },
+  {
+    path: 'jugador/:id',
+    loadChildren: () => import('./modules/home/pages/lista-jugador/lista-jugador.module').then( m => m.ListaJugadorPageModule)
+  },
 ];
 
 @NgModule({

@@ -6,10 +6,6 @@ import { LigaService } from 'src/app/core/services/liga.service';
 import { Equipo } from 'src/app/shared/models/Equipo';
 import { Liga } from 'src/app/shared/models/Liga';
 
-interface HtmlInputEvent extends Event {
-  target: HTMLInputElement & EventTarget;
-}
-
 @Component({
   selector: 'app-edit-equipo',
   templateUrl: './edit-equipo.component.html',
