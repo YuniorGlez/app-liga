@@ -15,6 +15,11 @@ export class EquipoService {
     return this.http.get(url);
   }
 
+  listaPaginacion(pagina: number){
+    const url = `${environment.api_base}teams/?_page=${pagina}&_limit=20`
+    return this.http.get(url);
+  }
+
   listaPorLiga(id: string){
     const url = `${environment.api_base}teams?Liga=${id}`
     return this.http.get(url);
