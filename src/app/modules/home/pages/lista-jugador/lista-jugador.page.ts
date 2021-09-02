@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { JugadorService } from 'src/app/core/services/jugador.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 import { Jugador } from 'src/app/shared/models/Jugador';
 import { EditJugadorComponent } from '../../components/edit/edit-jugador/edit-jugador.component';
 import { RegistroJugadorComponent } from '../../components/registro/registro-jugador/registro-jugador.component';
@@ -20,7 +21,8 @@ export class ListaJugadorPage implements OnInit {
   constructor(
     private jugadorService: JugadorService,
     private route: ActivatedRoute,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
@@ -80,11 +82,11 @@ export class ListaJugadorPage implements OnInit {
 
   eliminar(jugador: Jugador){
     this.jugadorService.eliminar(jugador.id).subscribe((res) =>{
-      console.log(res);
       let pos = this.lista_jugador.indexOf(jugador);
       if(pos != -1){
         this.lista_jugador.splice(pos, 1);
       }
+      this.toastService.mostrarMensaje('Se elimino el jugador', 500);
     }, error => console.log(error))
   }
 

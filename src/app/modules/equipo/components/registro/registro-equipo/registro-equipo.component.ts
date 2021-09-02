@@ -2,8 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { EquipoService } from 'src/app/core/services/equipo.service';
+import { LigaService } from 'src/app/core/services/liga.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Equipo } from 'src/app/shared/models/Equipo';
+import { Liga } from 'src/app/shared/models/Liga';
 
 @Component({
   selector: 'app-registro-equipo',
@@ -12,14 +14,15 @@ import { Equipo } from 'src/app/shared/models/Equipo';
 })
 export class RegistroEquipoComponent implements OnInit {
 
-  @Input() data: string;
   form: FormGroup;
   ruta_imagen: string;
+  lista_liga: Array<Liga> = [];
 
   constructor(
     private modalController: ModalController,
     public formBuilder: FormBuilder,
     private equipoService: EquipoService,
+    private ligaService: LigaService,
     private toastService: ToastService
   ) { 
   }
@@ -27,9 +30,16 @@ export class RegistroEquipoComponent implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       nombre_equipo: ['', [Validators.required]],
-      liga: [this.data, [Validators.required]],
+      liga: ['', [Validators.required]],
       logo: ['']
     })
+    this.obtenerListaLiga();
+  }
+
+  obtenerListaLiga(){
+    this.ligaService.lista().subscribe((res: any) => {
+      this.lista_liga = res;
+    }, error => console.log(error))
   }
 
   visualizarImagen(){

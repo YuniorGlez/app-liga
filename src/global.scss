@@ -24,3 +24,26 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-searchbar{
+    background: white!important;
+}
+
+.boton-w-100{
+    width: 100%;
+}
+
+.item-margin{
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.item-margin__imagen{
+    margin: auto;
+}
+
+.row-absolute-bottom{
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
