@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { JugadorService } from 'src/app/core/services/jugador.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 import { Jugador } from 'src/app/shared/models/Jugador';
 import { EditJugadorComponent } from '../home/components/edit/edit-jugador/edit-jugador.component';
-import { RegistroJugadorComponent } from '../home/components/registro/registro-jugador/registro-jugador.component';
+import { RegistroJugadorComponent } from './components/registro/registro-jugador/registro-jugador.component';
 
 @Component({
   selector: 'app-jugador',
@@ -22,7 +22,8 @@ export class JugadorPage implements OnInit {
 
   constructor(
     private jugadorService: JugadorService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
@@ -76,19 +77,21 @@ export class JugadorPage implements OnInit {
       },
     });
     modal.onDidDismiss().then((data) => {
-      this.pagina = 1;
-      this.obtenerListaJugador(this.pagina);
+      if(data){
+        this.lista_jugador = [];
+        this.pagina = 1;
+        this.obtenerListaJugador(this.pagina);
+      }
     });
     return await modal.present();
   }
 
   eliminar(jugador: Jugador){
     this.jugadorService.eliminar(jugador.id).subscribe((res) =>{
-      console.log(res);
-      let pos = this.lista_jugador.indexOf(jugador);
-      if(pos != -1){
-        this.lista_jugador.splice(pos, 1);
-      }
+      this.toastService.mostrarMensaje('Se elimino el jugador', 500)
+      this.lista_jugador = [];
+      this.pagina = 1;
+      this.obtenerListaJugador(this.pagina);
     }, error => console.log(error))
   }
 

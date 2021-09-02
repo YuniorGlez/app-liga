@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { JugadorService } from 'src/app/core/services/jugador.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 import { Jugador } from 'src/app/shared/models/Jugador';
 
 @Component({
@@ -18,7 +19,8 @@ export class RegistroJugadorComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     public formBuilder: FormBuilder,
-    private jugadorService: JugadorService
+    private jugadorService: JugadorService,
+    private toastService: ToastService
   ) { 
   }
 
@@ -48,6 +50,7 @@ export class RegistroJugadorComponent implements OnInit {
       "teamId": this.form.get('equipo').value
     }
     this.jugadorService.registrar(objJugador).subscribe((res) => {
+      this.toastService.mostrarMensaje('Se registro el jugador correctamente', 500)
       this.modalController.dismiss();
     }, error => {
       console.log(error)

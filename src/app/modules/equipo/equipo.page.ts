@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { EquipoService } from 'src/app/core/services/equipo.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 import { Equipo } from 'src/app/shared/models/Equipo';
 import { EditEquipoComponent } from '../home/components/edit/edit-equipo/edit-equipo.component';
-import { RegistroEquipoComponent } from '../home/components/registro/registro-equipo/registro-equipo.component';
+import { RegistroEquipoComponent } from './components/registro/registro-equipo/registro-equipo.component';
 
 @Component({
   selector: 'app-equipo',
@@ -21,7 +22,8 @@ export class EquipoPage implements OnInit {
 
   constructor(
     private equipoService: EquipoService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
@@ -77,19 +79,21 @@ export class EquipoPage implements OnInit {
       },
     });
     modal.onDidDismiss().then((data) => {
-      this.pagina = 1;
-      this.obtenerListaEquipo(this.pagina);
+      if(data){
+        this.lista_equipo = [];
+        this.pagina = 1;
+        this.obtenerListaEquipo(this.pagina);
+      }
     });
     return await modal.present();
   }
 
   eliminar(equipo: Equipo){
     this.equipoService.eliminar(equipo.id).subscribe((res) =>{
-      console.log(res);
-      let pos = this.lista_equipo.indexOf(equipo);
-      if(pos != -1){
-        this.lista_equipo.splice(pos, 1);
-      }
+      this.toastService.mostrarMensaje('Se elimino el equipo', 500);
+      this.lista_equipo = [];
+      this.pagina = 1;
+      this.obtenerListaEquipo(this.pagina);
     }, error => console.log(error))
   }
 

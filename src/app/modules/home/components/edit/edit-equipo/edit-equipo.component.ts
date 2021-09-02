@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { EquipoService } from 'src/app/core/services/equipo.service';
 import { LigaService } from 'src/app/core/services/liga.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 import { Equipo } from 'src/app/shared/models/Equipo';
 import { Liga } from 'src/app/shared/models/Liga';
 
@@ -24,7 +25,8 @@ export class EditEquipoComponent implements OnInit {
     private modalController: ModalController,
     public formBuilder: FormBuilder,
     private ligaService: LigaService,
-    private equipoService: EquipoService
+    private equipoService: EquipoService,
+    private toastService: ToastService
   ) { 
   }
 
@@ -72,7 +74,8 @@ export class EditEquipoComponent implements OnInit {
       "Liga": this.form.get('liga').value
     }
     this.equipoService.actualizar(objEquipo, this.data.id).subscribe((res) => {
-      this.modalController.dismiss();
+      this.toastService.mostrarMensaje('Se actualizo el registro correctamente', 500)
+      this.modalController.dismiss(res);
     }, error => {
       console.log(error)
     })
