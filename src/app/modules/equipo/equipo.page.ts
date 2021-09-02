@@ -17,6 +17,7 @@ export class EquipoPage implements OnInit {
   lista_equipo: Array<Equipo> = [];
   pagina: number = 1;
   limite: number = -1;
+  texto_busqueda: string = '';
 
   constructor(
     private equipoService: EquipoService,
@@ -28,9 +29,16 @@ export class EquipoPage implements OnInit {
   }
 
   obtenerListaEquipo(pagina: number) {
-    this.equipoService.listaPaginacion(pagina).subscribe((res: any) => {
+    this.equipoService.busqueda(pagina, this.texto_busqueda).subscribe((res: any) => {
       this.limite = res.length;
       this.lista_equipo = this.lista_equipo.concat(res);
+    }, error => console.log(error))
+  }
+
+  buscar(event){
+    this.texto_busqueda = event.detail.value;
+    this.equipoService.busqueda(this.pagina, this.texto_busqueda).subscribe((res: any) =>{
+      this.lista_equipo = res;
     }, error => console.log(error))
   }
 

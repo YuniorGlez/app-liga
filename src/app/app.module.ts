@@ -22,7 +22,7 @@ import { RegistroJugadorComponent } from './modules/home/components/registro/reg
     AppRoutingModule, 
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
