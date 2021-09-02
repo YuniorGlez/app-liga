@@ -41,6 +41,7 @@ export class RegistroEquipoComponent implements OnInit {
   }
 
   enviar() {
+    this.visualizarImagen();
     let objEquipo: Equipo = {
       "Nombre del equipo": this.form.get('nombre_equipo').value,
       "Logo del Equipo": this.form.get('logo').value,
