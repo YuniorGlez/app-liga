@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro Equipo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+    <ion-item class="item-margin">
+      <ion-label position="floating">Nombre del Equipo</ion-label>
+      <ion-input formControlName="nombre_equipo" type="text" required></ion-input>
+    </ion-item>
+    <ion-item class="item-margin">
+      <ion-label position="floating">Liga</ion-label>
+      <ion-select formControlName="liga">
+        <ion-select-option *ngFor="let liga of lista_liga" [value]="liga['Identificador']">{{liga['Nombre De La Liga']}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="item-margin">
+      <ion-label>Logo del Equipo</ion-label>
+      <ion-button (click)="visualizarImagen()" color="primary" size="small">Visualizar</ion-button>
+    </ion-item>
+    <ion-item class="item-margin" *ngIf="ruta_imagen">
+      <img class="item-margin__imagen" [src]="ruta_imagen" alt="Logo del equipo"/>
+    </ion-item>
+    <ion-row class="row-absolute-bottom">
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block" [disabled]="!form.valid" >Guardar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>

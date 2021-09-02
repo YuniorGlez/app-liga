@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Football-Liga
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" scroll-y="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Football-Liga</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="principal">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" size-sm *ngFor="let liga of lista_liga">
+          <ion-card routerLink="/equipo/{{liga['Identificador']}}">
+            <img src="{{liga['Logo de la Liga']}}" alt="Logo de la liga">
+            <ion-card-content>
+              <ion-card-title>{{liga['Nombre De La Liga']}}</ion-card-title>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

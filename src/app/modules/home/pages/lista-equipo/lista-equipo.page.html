@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/liga"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Football-Equipo
+    </ion-title>
+    <ion-buttons (click)="registrar()" slot="end">
+      <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-searchbar (ionChange)="buscar($event)" animated></ion-searchbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" scroll-y="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Football-Equipo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="principal">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" size-sm *ngFor="let equipo of lista_equipo | filtro:this.texto_busqueda">
+          <ion-card>
+            <img src="{{equipo['Logo del Equipo']}}" alt="Logo del equipo">
+            <ion-card-content>
+              <ion-card-title>{{equipo['Nombre del equipo']}}</ion-card-title>
+            </ion-card-content>
+            <ion-row>
+              <ion-col size="12">
+                <ion-item-group #grupoItem>
+                  <ion-item-sliding>
+                    <ion-item>
+                      <ion-button class="boton-w-100" (click)="abrirSlide(grupoItem)" color="warning" expand="full" fill="solid" size="small">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                        Opciones
+                      </ion-button>
+                    </ion-item>
+                    <ion-item-options side="end" (click)="cerrarSlide(grupoItem)" >
+                      <ion-item-option color="danger" (click)="eliminar(equipo)" expandable>Eliminar</ion-item-option>
+                      <ion-item-option color="warning" (click)="editar(equipo)" expandable>Editar</ion-item-option>
+                    </ion-item-options>
+                  </ion-item-sliding>
+                </ion-item-group>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-button class="boton-w-100" routerLink="/jugador/{{equipo['id']}}" color="success" expand="full" fill="solid" size="small">
+                    Ver detalle
+                  </ion-button>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
