@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro Equipo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+    <ion-item>
+      <ion-label position="floating">Nombre del Equipo</ion-label>
+      <ion-input formControlName="nombre_equipo" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Logo del Equipo</ion-label>
+      <ion-button (click)="visualizarImagen()" color="primary" size="small">Visualizar</ion-button>
+    </ion-item>
+    <ion-item *ngIf="ruta_imagen">
+      <img [src]="ruta_imagen" alt="Logo del equipo"/>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block" [disabled]="!form.valid" >Guardar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>
