@@ -13,8 +13,9 @@ import { EquipoPage } from './equipo.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    EquipoPageRoutingModule
+    EquipoPageRoutingModule,
   ],
+  exports: [],
   declarations: [EquipoPage]
 })
 export class EquipoPageModule {}

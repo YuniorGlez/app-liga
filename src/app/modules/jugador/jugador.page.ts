@@ -18,6 +18,7 @@ export class JugadorPage implements OnInit {
   lista_jugador: Array<Jugador> = [];
   pagina: number = 1;
   limite: number = -1;
+  texto_busqueda: string = '';
 
   constructor(
     private jugadorService: JugadorService,
@@ -29,9 +30,16 @@ export class JugadorPage implements OnInit {
   }
 
   obtenerListaJugador(pagina: number) {
-    this.jugadorService.listaPaginacion(pagina).subscribe((res: any) => {
+    this.jugadorService.busqueda(pagina, this.texto_busqueda).subscribe((res: any) => {
       this.limite = res.length;
       this.lista_jugador = this.lista_jugador.concat(res);
+    }, error => console.log(error))
+  }
+
+  buscar(event){
+    this.texto_busqueda = event.detail.value;
+    this.jugadorService.busqueda(this.pagina, this.texto_busqueda).subscribe((res: any) =>{
+      this.lista_jugador = res;
     }, error => console.log(error))
   }
 

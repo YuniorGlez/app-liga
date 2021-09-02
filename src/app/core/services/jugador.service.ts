@@ -25,6 +25,11 @@ export class JugadorService {
     return this.http.get(url);
   }
 
+  busqueda(pagina, q: string){
+    const url = `${environment.api_base}players/?_page=${pagina}&_limit=20&q=${q}`
+    return this.http.get(url);
+  }
+
   registrar(jugador: Jugador){
     const url = `${environment.api_base}players/`
     return this.http.post(url, jugador);

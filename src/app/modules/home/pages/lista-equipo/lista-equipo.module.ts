@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ListaEquipoPageRoutingModule } from './lista-equipo-routing.module';
 
 import { ListaEquipoPage } from './lista-equipo.page';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListaEquipoPageRoutingModule
+    ListaEquipoPageRoutingModule,
+    PipesModule
   ],
   declarations: [ListaEquipoPage]
 })

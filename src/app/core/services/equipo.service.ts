@@ -25,6 +25,11 @@ export class EquipoService {
     return this.http.get(url);
   }
 
+  busqueda(pagina, q: string){
+    const url = `${environment.api_base}teams/?_page=${pagina}&_limit=20&q=${q}`
+    return this.http.get(url);
+  }
+
   registrar(equipo: Equipo){
     const url = `${environment.api_base}teams/`
     return this.http.post(url, equipo);

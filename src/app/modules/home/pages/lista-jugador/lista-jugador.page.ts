@@ -15,6 +15,7 @@ export class ListaJugadorPage implements OnInit {
 
   lista_jugador: Array<Jugador> = [];
   id: string;
+  texto_busqueda: string = '';
 
   constructor(
     private jugadorService: JugadorService,
@@ -31,6 +32,10 @@ export class ListaJugadorPage implements OnInit {
     this.jugadorService.listaPorEquipo(id).subscribe((res: any) => {
       this.lista_jugador = res;
     }, error => console.log(error))
+  }
+
+  buscar(event){
+    this.texto_busqueda = event.detail.value;
   }
 
   abrirSlide(item: any) {
