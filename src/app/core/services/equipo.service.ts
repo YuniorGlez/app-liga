@@ -10,9 +10,9 @@ export class EquipoService {
 
   constructor(private http: HttpClient) { }
 
-  lista(){
+  lista() : Promise<Equipo[]>{
     const url = `${environment.api_base}teams/`
-    return this.http.get(url);
+    return this.http.get<Equipo[]>(url).pipe(take(1)).toPromise();
   }
 
   listaPaginacion(pagina: number){
